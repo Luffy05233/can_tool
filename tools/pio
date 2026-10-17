@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Prefer an explicitly installed CLI, then PlatformIO IDE's usual environment.
+if command -v pio >/dev/null 2>&1; then
+    exec pio "$@"
+fi
+platformio_cli="${PLATFORMIO_CORE_DIR:-$HOME/.platformio}/penv/bin/pio"
+if [[ -x "$platformio_cli" ]]; then
+    exec "$platformio_cli" "$@"
+fi
+printf '%s\n' 'PlatformIO was not found. Install the PlatformIO IDE extension or put pio on PATH.' >&2
+exit 127

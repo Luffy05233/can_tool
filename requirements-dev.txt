@@ -1,0 +1,3 @@
+# Versions used for the firmware builds and serial tools on 2026-10-17.
+platformio==6.2.0
+pyserial==3.5
